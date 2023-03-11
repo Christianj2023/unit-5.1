@@ -7,30 +7,78 @@ public class PlayerControl : MonoBehaviour
     private Rigidbody2D rb;
     public float jumpheight;
     public float movespeed;
+    public float dirX;
     private bool jumpable;
     public int hascoins;
+    public Animator animator;
+    public bool isFacingRight = true;
+    private Vector3 localScale;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        localScale = transform.localScale;
     }
 
+   
     // Update is called once per frame
     void Update()
-    {
+    {   
+        dirX = Input.GetAxisRaw("Horizontal") * movespeed;
+
+        
         if (Input.GetKey(KeyCode.RightArrow))
     		{
     			rb.transform.Translate(Vector2.right * movespeed);
     		}
     	if (Input.GetKey(KeyCode.LeftArrow))
     		{
-    			rb.transform.Translate(Vector2.left * movespeed);
+                rb.transform.Translate(Vector2.left * movespeed);
+
     		}
     	if (Input.GetKeyDown(KeyCode.UpArrow) && jumpable == true)
     		{
             	rb.AddForce(Vector2.up * jumpheight, ForceMode2D.Impulse);
     		}
+        if(Mathf.Abs(dirX) > 0 && rb.velocity.y == 0)
+           animator.SetBool("Running", true);
+        else
+            animator.SetBool("Running", false);
+
+        if(rb.velocity.y == 0)
+        {
+            animator.SetBool("jumping", false);
+        }
+        if(rb.velocity.y > 0)
+        {
+            animator.SetBool("jumping", true);
+        }
+        
+        if(isFacingRight && movespeed < 0){
+            Flip();
+
+        }
+
+    void Fixedupdate()
+    {
+        rb.velocity = new Vector2(dirX, rb.velocity.y);
     }
+    void Flip()
+    {
+        if (dirX > 0)
+            isFacingRight = true;
+        else if (dirX < 0)
+            isFacingRight = false;
+        if (((isFacingRight) && (localScale.x < 0)) || ((!isFacingRight) && (localScale.x > 0)))
+            localScale.x *= -1;
+
+        transform.localScale = localScale;
+    }
+
+    }
+
+  
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
