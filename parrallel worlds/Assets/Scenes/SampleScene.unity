@@ -445,11 +445,7 @@ GameObject:
   - component: {fileID: 342348746}
   - component: {fileID: 342348745}
   m_Layer: 0
-<<<<<<< Updated upstream
   m_Name: Flower-3
-=======
-  m_Name: christian
->>>>>>> Stashed changes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -515,7 +511,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 342348744}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.955986, y: -3.0835094, z: 0}
+  m_LocalPosition: {x: -5.94, y: -3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
