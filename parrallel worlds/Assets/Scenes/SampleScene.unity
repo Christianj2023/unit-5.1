@@ -445,7 +445,11 @@ GameObject:
   - component: {fileID: 342348746}
   - component: {fileID: 342348745}
   m_Layer: 0
+<<<<<<< Updated upstream
   m_Name: Flower-3
+=======
+  m_Name: christian
+>>>>>>> Stashed changes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
