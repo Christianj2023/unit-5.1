@@ -13,6 +13,11 @@ public class PlayerControl : MonoBehaviour
     public Animator animator;
     public bool isFacingRight = true;
     private Vector3 localScale;
+    private int portalCooldown = 0;
+    public float portalOneX;
+    public float portalOneY;
+    public float portalTwoX;
+    public float portalTwoY;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,8 +31,11 @@ public class PlayerControl : MonoBehaviour
     void Update()
     {   
         dirX = Input.GetAxisRaw("Horizontal") * movespeed;
+        if (portalCooldown > 0)
+        {
+        	portalCooldown = portalCooldown - 1;
+        }
 
-        
         if (Input.GetKey(KeyCode.RightArrow))
     		{
     			rb.transform.Translate(Vector2.right * movespeed);
@@ -55,10 +63,10 @@ public class PlayerControl : MonoBehaviour
             animator.SetBool("jumping", true);
         }
         
-        if(isFacingRight && movespeed < 0){
+        if(isFacingRight && movespeed < 0)
+        {
             Flip();
-
-        }
+    	}
 
     void Fixedupdate()
     {
@@ -99,6 +107,16 @@ public class PlayerControl : MonoBehaviour
         {
         	trigger.gameObject.SetActive(false);
         	hascoins += 1;
+        }
+        if (trigger.gameObject.CompareTag("portal") && portalCooldown == 0)
+        {
+            portalCooldown = 300;
+            transform.position = new Vector3(portalOneX,portalOneY,0f);
+        }
+        if (trigger.gameObject.CompareTag("portal 2") && portalCooldown == 0)
+        {
+            portalCooldown = 300;
+            transform.position = new Vector3(portalTwoX,portalTwoY,0f);
         }
     }
 
