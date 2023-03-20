@@ -16,6 +16,6 @@ public class CameraLock : MonoBehaviour
     void Update()
     {
     	player = GameObject.FindWithTag("Player");
-        transform.position = new Vector3(player.transform.position.x, 0f, player.transform.position.z - 10);
+        transform.position = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z - 10);
     }
 }

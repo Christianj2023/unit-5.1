@@ -16,6 +16,6 @@ public class GuiLock : MonoBehaviour
     void Update()
     {
         player = GameObject.FindWithTag("Player");
-        transform.position = new Vector3(player.transform.position.x, 0f, 0f);
+        transform.position = new Vector3(player.transform.position.x + 1, player.transform.position.y, 0f);
     }
 }
